@@ -1,9 +1,4 @@
-;; Basically stolen from https://lispcookbook.github.io/cl-cookbook/strings.html
-(defun split-by-x (string)
-    (loop for i = 0 then (1+ j)
-          as j = (position #\X string :start i)
-          collect (subseq string i j)
-          while j))
+(load "../common.lisp")
 
 (defun ribbon-len (dimensions)
   (let ((dimensions (sort dimensions #'<)))
@@ -16,6 +11,6 @@
 (defun main ()
   (let ((gifts
           (remove nil (loop for gift = (read *standard-input* nil nil)
-            collect (if gift (mapcar 'parse-integer (split-by-x (string gift))))
+            collect (if gift (mapcar 'parse-integer (split-by-delimeter (string gift) #\X)))
             while gift))))
     (write (reduce #'+ (mapcar 'ribbon-len gifts)))))
