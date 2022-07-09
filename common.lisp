@@ -15,3 +15,14 @@
 (defun left-rotate (l)
   "Rotates list given by 'l' one element to the right"
   (append (cdr l) (cons (car l) ())))
+
+(defun collect-on-even (l)
+  "Collect all items on even positions in list 'l'"
+  (loop for (a b) on l by #'cddr
+        when b collect b))
+
+(defun collect-on-odd (l)
+  "Collect all items on odd positions in list 'l'"
+  (loop for (a b) on l by #'cddr
+        when a collect a))
+
